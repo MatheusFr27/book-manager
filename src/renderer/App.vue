@@ -1,12 +1,19 @@
 <template>
   <div id="app">
     <router-view></router-view>
+
+    <Footer />
   </div>
 </template>
 
 <script>
+import Footer from "../renderer/components/ComponentsFolder/Footer";
+
 export default {
   name: "book-manager",
+  components: {
+    Footer,
+  },
 };
 </script>
 

@@ -87,19 +87,12 @@
         <p>Informações</p>
       </router-link>
     </div>
-
-    <Footer />
   </section>
 </template>
 
 <script>
-import Footer from "./ComponentsFolder/Footer";
-
 export default {
   name: "Home",
-  components: {
-    Footer,
-  },
 };
 </script>
 
