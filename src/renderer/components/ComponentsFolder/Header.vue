@@ -1,25 +1,35 @@
 <template>
   <header>
-    <router-link to="/">
-      <img
-        src="../../assets/Icons/Logo-book-manager.svg"
-        alt="Logo do aplicativo"
-        class="logo"
-      />
-    </router-link>
+    <div class="container-logo-nav">
+      <router-link
+        title="Voltar para a interface inicial. (Alt + 1)"
+        accesskey="1"
+        to="/"
+      >
+        <img
+          src="../../assets/Icons/Logo-book-manager.svg"
+          alt="Logo do aplicativo"
+          class="logo"
+        />
+      </router-link>
 
-    <nav>
-      <ul>
-        <li>
-          <router-link to="">Livros</router-link>
-        </li>
-        <li>
-          <router-link to="">Gerenciar</router-link>
-        </li>
-      </ul>
-    </nav>
+      <nav>
+        <ul>
+          <li>
+            <router-link title="Ver livros. (Alt + 2)" accesskey="2" to=""
+              >Livros</router-link
+            >
+          </li>
+          <li>
+            <router-link title="Gerenciar livros. (Alt + 3)" accesskey="3" to=""
+              >Gerenciar</router-link
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
 
-    <router-link to=""
+    <router-link title="Configurações. (Alt + 4)" accesskey="4" to=""
       ><svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -56,6 +66,7 @@ header {
 
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 
   align-items: center;
 }
@@ -72,6 +83,7 @@ header {
   animation: 0.5s borderLogo forwards;
 }
 
+.container-logo-nav,
 nav,
 nav ul {
   display: flex;
@@ -80,26 +92,31 @@ nav ul {
   height: 100%;
 }
 
+.container-logo-nav {
+  height: auto;
+  margin: 0;
+  padding: 0;
+
+  align-items: center;
+}
+
 nav ul {
   list-style-type: none;
   margin: 0;
 }
 
 nav ul li {
-  margin: 0 0.5em;
-  padding: 0 0.5em;
   text-align: center;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-nav ul li:hover {
+nav ul li:hover a,
+.class-config:hover {
   background-color: rgb(59, 59, 59);
 }
 
 nav ul li a {
+  margin: 0 0.5em;
+  padding: 0.5em 0.5em;
   color: white;
 
   text-decoration: none;
@@ -107,6 +124,9 @@ nav ul li a {
 
 .class-config {
   height: 1em;
+  margin: 0 1em;
+
+  padding: 0.9em 0.5em;
 }
 
 @keyframes borderLogo {
