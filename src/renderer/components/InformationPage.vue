@@ -7,7 +7,7 @@
       <!-- Lado das informações -->
       <div>
         <div class="items">
-          <h2>Dependências Usadas</h2>
+          <h2>Informações do Projeto</h2>
           <div class="item">
             <label class="name">Versão da aplicação:</label>
             <label class="value">{{ versionApplication }}</label>
