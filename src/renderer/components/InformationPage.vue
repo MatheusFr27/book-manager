@@ -1,41 +1,77 @@
 <template>
-  <section>
-    <div class="title">Informações</div>
-    <div class="items">
-      <div class="item">
-        <div class="name">Versão da aplicação:</div>
-        <div class="value">{{ versionApplication }}</div>
-      </div>
-      <div class="item">
-        <div class="name">Vue.js:</div>
-        <div class="value">{{ vue }}</div>
-      </div>
-      <div class="item">
-        <div class="name">Electron:</div>
-        <div class="value">{{ electron }}</div>
-      </div>
-      <div class="item">
-        <div class="name">Node:</div>
-        <div class="value">{{ node }}</div>
-      </div>
-      <div class="item">
-        <div class="name">Nedb:</div>
-        <div class="value">{{ nedb }}</div>
-      </div>
-    </div>
+  <section class="container-base">
+    <Header />
 
-    <Footer />
+    <h1>Informações</h1>
+    <section class="container-informations">
+      <!-- Lado das informações -->
+      <div>
+        <div class="items">
+          <h2>Dependências Usadas</h2>
+          <div class="item">
+            <label class="name">Versão da aplicação:</label>
+            <label class="value">{{ versionApplication }}</label>
+          </div>
+          <div class="item">
+            <label class="name">Vue.js:</label>
+            <label class="value">{{ vue }}</label>
+          </div>
+          <div class="item">
+            <label class="name">Electron:</label>
+            <label class="value">{{ electron }}</label>
+          </div>
+          <div class="item">
+            <label class="name">Node:</label>
+            <label class="value">{{ node }}</label>
+          </div>
+          <div class="item">
+            <label class="name">Nedb:</label>
+            <label class="value">{{ nedb }}</label>
+          </div>
+        </div>
+        <h2>Desenvolvedor</h2>
+        <div class="item">
+          <label class="name">Autor:</label>
+          <label class="value">Matheus Eduardo França</label>
+        </div>
+        <div class="item">
+          <label class="name">Gmail:</label>
+          <label class="value">matheusefranca1727@gmail.com</label>
+        </div>
+        <div class="item">
+          <label class="name">Github:</label>
+          <a href="https://github.com/MatheusFr27" target="_blank" class="value"
+            >MatheusFr27</a
+          >
+        </div>
+        <h2>Licença</h2>
+        <div class="item">
+          <a
+            href="https://github.com/MatheusFr27/book-manager/blob/main/LICENSE"
+            target="_blank"
+            class="value"
+            >MIT</a
+          >
+        </div>
+      </div>
+      <div>
+        <p style="width: 250px;">
+          <strong>Nota:</strong> O aplicativo está em desenvolvimento, qualquer
+          dúvida/erro/bug envie um e-mail para o desenvolvedor.
+        </p>
+      </div>
+    </section>
   </section>
 </template>
 
 <script>
-import Footer from "./ComponentsFolder/Footer";
+import Header from "../components/ComponentsFolder/Header";
 import pkg from "./../../../package.json";
 
 export default {
   name: "InformationPage",
   components: {
-    Footer,
+    Header,
   },
   data() {
     return {
@@ -46,16 +82,33 @@ export default {
       versionApplication: pkg.version,
     };
   },
+  methods: {
+    openLink(linkExternal) {
+      this.$electron.shell.openExternal(linkExternal);
+      console.log("Fui clicado");
+    },
+  },
 };
 </script>
 
 <style scoped>
-.title {
-  color: #888;
-  font-size: 18px;
-  font-weight: initial;
-  letter-spacing: 0.25px;
-  margin-top: 10px;
+.container-base {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  color: rgb(68, 68, 68);
+  font-size: 23pt;
+  font-weight: 700;
+  margin-top: 2em;
+}
+
+h2 {
+  color: #1e1e1e;
+  font-weight: 600;
 }
 
 .items {
@@ -75,5 +128,14 @@ export default {
 .item .value {
   color: #35495e;
   font-weight: bold;
+}
+
+.container-informations {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
 </style>
