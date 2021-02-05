@@ -11,7 +11,12 @@
 
     <div class="container-buttons">
       <!-- Botão de Ver Livros -->
-      <router-link to="" class="button-menu">
+      <router-link
+        to=""
+        title="Página para ver livros. (Alt + 2)"
+        accesskey="2"
+        class="button-menu"
+      >
         <svg
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +34,12 @@
         <p>Livros</p>
       </router-link>
       <!-- Botão para gerenciar os livros -->
-      <router-link to="" class="button-menu">
+      <router-link
+        to=""
+        title="Página de Gerenciamento dos livros. (Alt + 3)"
+        accesskey="3"
+        class="button-menu"
+      >
         <svg
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +58,12 @@
         <p>Gerenciar</p>
       </router-link>
       <!-- Botão de configuração -->
-      <router-link to="" class="button-menu">
+      <router-link
+        to=""
+        title="Configurações. (Alt + 4)"
+        accesskey="4"
+        class="button-menu"
+      >
         <svg
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +85,12 @@
         <p>Configurações</p>
       </router-link>
       <!-- botão de informações -->
-      <router-link to="/information" class="button-menu">
+      <router-link
+        to="/information"
+        title="Página de informações. (Alt + 5)"
+        accesskey="5"
+        class="button-menu"
+      >
         <svg
           version="1.1"
           xmlns="http://www.w3.org/2000/svg"
