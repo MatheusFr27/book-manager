@@ -18,6 +18,16 @@
     <div class="container-view-and-detail">
       <section class="container-view">
         <div class="container-search-book">
+          <!-- Seleciona o tipo de busca o usuário deseja ter -->
+          <select>
+            <option value="0">Título</option>
+            <option value="1">Gênero</option>
+            <option value="2">Autor</option>
+            <option value="3">Data</option>
+          </select>
+          <input type="text" placeholder="Pesquise por um livro" />
+
+          <!-- Botão para confirmar a busca -->
           <button>
             <svg
               version="1.1"
@@ -35,17 +45,35 @@
             </svg>
             Buscar
           </button>
-          <input type="text" placeholder="Pesquise por um livro" />
         </div>
         <div class="container-view-books">
-          <BookTemplate :bookStructure="bookData" />
+          <BookTemplate @send-data="viewBookDetail = $event" :bookStructure="bookData" />
         </div>
       </section>
 
+      <!-- Mostra detalhes do elemento -->
       <div class="container-book-detail">
-        <h2>Uma Aventura</h2>
+        <h2><strong>Título:</strong> {{ viewBookDetail.title }}</h2>
 
-        <p>Maranhes horror</p>
+        <p><strong>Gênero:</strong> {{ viewBookDetail.genre }} &ensp; <strong>Autor:</strong> {{ viewBookDetail.author }}</p>
+        <p><strong>Lançado em:</strong> {{ viewBookDetail.launch }}</p>
+
+        <!-- Tabela para mostrar exemplares, alugados e disponiveis -->
+        <table>
+          <thead>
+            <td><th>Exemplares</th></td>
+            <td><th>Alugados</th></td>
+            <td><th>Disponíveis</th></td>
+          </thead>
+          <tr>
+            <td>{{ viewBookDetail.numberOfBooks }}</td>
+            <td>{{ viewBookDetail.retendBooks }}</td>
+            <td>{{ calculatesAvailableBook }}</td>
+          </tr>
+        </table>
+
+        <!-- Aqui será mostrado as tags que foram postas sobre o elemento. -->
+        <p><strong>Observações:</strong></p>
       </div>
     </div>
   </section>
@@ -64,102 +92,45 @@ export default {
   data: () => ({
     bookData: [
       {
+        id: 3942838746,
         title: "Uma aventura foda",
         author: "Matheus lindo",
         genre: "Ação",
+        launch: '20/09/2020',
+        numberOfBooks: 5,
+        retendBooks: 3,
+        tags: [
+          {
+            tagName: 'Livro véio',
+            color: '#4287f5'
+          },
+          {
+            tagName: 'Em algum lugar muito secreto tem ouro.',
+            color: '#fad419'
+          }
+        ]
       },
       {
-        title: "Um sofrencia ",
-        author: "Pingo pinguço",
-        genre: "Drama",
-      },
-      {
-        title: "Um sofrencia ",
-        author: "Pingo pinguço",
-        genre: "Drama",
-      },
-      {
-        title: "Um sofrencia ",
-        author: "Pingo pinguço",
-        genre: "Drama",
-      },
-      {
-        title: "Um sofrencia ",
-        author: "Pingo pinguço",
-        genre: "Drama",
-      },
-      {
-        title: "Um sofrencia ",
-        author: "Pingo pinguço",
-        genre: "Drama",
-      },
-      {
-        title: "Uma aventura foda",
-        author: "Matheus lindo",
-        genre: "Ação",
-      },
-      {
-        title: "Uma aventura foda",
-        author: "Matheus lindo",
-        genre: "Ação",
-      },
-      {
-        title: "Uma aventura foda",
-        author: "Matheus lindo",
-        genre: "Ação",
-      },
-      {
-        title: "Uma aventura foda",
-        author: "Matheus lindo",
-        genre: "Ação",
-      },
-      {
-        title: "Uma aventura foda",
-        author: "Matheus lindo",
-        genre: "Ação",
-      },
-      {
-        title: "Uma aventura foda",
-        author: "Matheus lindo",
-        genre: "Ação",
-      },
-      {
-        title: "Uma aventura foda",
-        author: "Matheus lindo",
-        genre: "Ação",
-      },
-      {
-        title: "Uma aventura foda",
-        author: "Matheus lindo",
-        genre: "Ação",
-      },
-      {
-        title: "Uma aventura foda",
-        author: "Matheus lindo",
-        genre: "Ação",
-      },
-      {
-        title: "Uma aventura foda",
-        author: "Matheus lindo",
-        genre: "Ação",
-      },
-      {
-        title: "Uma aventura foda",
-        author: "Matheus lindo",
-        genre: "Ação",
-      },
-      {
-        title: "Uma aventura foda",
-        author: "Matheus lindo",
-        genre: "Ação",
-      },
-      {
-        title: "Uma aventura foda",
-        author: "Matheus lindo",
-        genre: "Ação",
+        id: 6888654,
+        title: "Nova vida",
+        author: "Vivi grilo",
+        genre: "Mistério",
+        launch: '19/03/1999',
+        numberOfBooks: 10,
+        retendBooks: 5,
+        tags: []
       },
     ],
+    viewBookDetail: [],
   }),
+  methods: {},
+  computed: {
+    calculatesAvailableBook: function() {
+      if(this.viewBookDetail.numberOfBooks && this.viewBookDetail.retendBooks) {
+        return this.viewBookDetail.numberOfBooks - this.viewBookDetail.retendBooks
+      }
+    }
+  }
 };
 </script>
 
@@ -197,7 +168,7 @@ h1 {
 }
 
 .container-base .container-view-and-detail .container-view-books {
-  border: black 2px solid;
+  background-color: rgb(250, 250, 250);
   border-radius: 5px 5px;
 
   width: 100%;
@@ -207,7 +178,11 @@ h1 {
 }
 
 .container-view .container-search-book {
-  margin-bottom: 1em;
+  margin: 1em;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .container-view .container-search-book button {
@@ -216,6 +191,7 @@ h1 {
   background-color: rgb(26, 167, 26);
 
   padding: 0.5em;
+  margin-left: 0.5em;
 
   color: white;
 }
@@ -224,20 +200,45 @@ h1 {
   background-color: rgb(24, 155, 24);
 }
 
-.container-view .container-search-book input {
+.container-view .container-search-book input, .container-view .container-search-book select{
   padding: 0.5em;
   border-radius: 2px 2px;
   border: gray 1.3px solid;
+
+  margin: 0;
+}
+
+.container-view .container-search-book select {
+  border-radius: 10px 0px 0px 10px;
+  padding: 0.4em;
+  background-color: rgb(238, 238, 238);
 }
 /* / */
 
 /* Estilo da visualização dos livros */
 .container-base .container-view-and-detail .container-book-detail {
-  background-color: rgb(228, 228, 228);
+  background-color: rgb(240, 240, 240);
   border-radius: 5px 5px;
 
   width: 35%;
   height: 30em;
+
+  padding: 0.5em 1em;
+}
+
+.container-base .container-view-and-detail .container-book-detail table {
+  border: 1.5px solid rgb(19, 19, 19);
+  background-color: rgb(230, 230, 230);
+
+}
+
+.container-base .container-view-and-detail .container-book-detail table thead {
+  background-color: rgb(202, 202, 202);
+
+}
+
+.container-base .container-view-and-detail .container-book-detail table tr td {
+  text-align: center;
 }
 /* / */
 </style>
