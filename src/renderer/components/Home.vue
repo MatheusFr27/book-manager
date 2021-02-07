@@ -3,16 +3,15 @@
     <div class="container-logo-title">
       <img
         class="logo"
-        src="../assets/logo-book-manager-img.png"
+        src="../assets/Icons/Logo-book-manager.svg"
         alt="Logo do Gerenciador de Livros"
       />
-      <h1>Gerenciador de Livros</h1>
     </div>
 
     <div class="container-buttons">
       <!-- Botão de Ver Livros -->
       <router-link
-        to=""
+        to="/book"
         title="Página para ver livros. (Alt + 2)"
         accesskey="2"
         class="button-menu"
@@ -130,32 +129,28 @@ export default {
 
 /* estilo do container do logo e título */
 .container-logo-title {
+  margin-top: 5em;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
 
-/* animação do título */
-.container-logo-title:hover h1 {
-  animation: 2s animationH1 forwards;
+  border: black 3px solid;
+
+  animation: 1.5s VisibleLogo forwards;
 }
 
 .container-logo-title .logo {
-  margin-top: 3em;
-}
+  height: 10em;
+  padding: 1em 2em;
 
-/* estilo do título */
-.container-logo-title h1 {
-  text-align: center;
-  font-size: 2em;
-
-  visibility: hidden;
+  animation: 4s VisibleLogo forwards;
 }
 
 /* css dos botões */
 .container-buttons {
-  margin-top: 5em;
+  margin-top: 10em;
 }
 
 .container-buttons,
@@ -225,20 +220,17 @@ export default {
   }
 }
 
-/* Animação do título */
-@keyframes animationH1 {
+@keyframes VisibleLogo {
   0% {
-    transform: scale(0, 0);
-    visibility: hidden;
+    opacity: 0;
     position: relative;
-    bottom: 3em;
+    top: 3em;
   }
 
   100% {
-    transform: scale(1, 1);
-    visibility: visible;
+    opacity: 100%;
     position: relative;
-    bottom: 0em;
+    top: 0;
   }
 }
 </style>
