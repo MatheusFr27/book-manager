@@ -7,7 +7,7 @@
         to="/"
       >
         <img
-          src="../../assets/Icons/Logo-book-manager.svg"
+          src="../../assets/Icons/logo-g-livros-icon.svg"
           alt="Logo do aplicativo"
           class="logo"
         />
@@ -16,7 +16,7 @@
       <nav>
         <ul>
           <li>
-            <router-link title="Ver livros. (Alt + 2)" accesskey="2" to=""
+            <router-link title="Ver livros. (Alt + 2)" accesskey="2" to="/book"
               >Livros</router-link
             >
           </li>
@@ -103,6 +103,7 @@ nav ul {
 nav ul {
   list-style-type: none;
   margin: 0;
+  padding: 0 1em;
 }
 
 nav ul li {
