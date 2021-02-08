@@ -13,7 +13,7 @@ Existirá Observações onde o usuário poderá escrever o que desejar sobre o l
 -->
 
 <template>
-  <div class="container-base">
+  <div class="parent-container">
     <div
       @click="$emit('send-data', book)"
       class="container-book-template"
@@ -21,7 +21,7 @@ Existirá Observações onde o usuário poderá escrever o que desejar sobre o l
       :key="book.id"
     >
       <div class="container-title-tag">
-        <h1 title="Título">{{ book.title }}</h1>
+        <h1 class="no-point" title="Título">{{ book.title }}</h1>
         <div v-if="book.tags.length >= 1" class="container-tag">
           <div
             class="tag"
@@ -29,13 +29,13 @@ Existirá Observações onde o usuário poderá escrever o que desejar sobre o l
             :key="i"
             :style="{ backgroundColor: tag.color }"
           >
-            <p>{{ tag.tagName }}</p>
+            <p class="no-point">{{ tag.tagName }}</p>
           </div>
         </div>
       </div>
 
       <div class="container-title-tag">
-        <p title="Gênero e autor do livro">
+        <p class="no-point" title="Gênero, autor do livro e data de lançamento">
           <svg
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -69,10 +69,7 @@ Existirá Observações onde o usuário poderá escrever o que desejar sobre o l
 	c1.1,0,2,0.9,2,2s-0.9,2-2,2s-2-0.9-2-2S8.9,10,10,10 M14,18H6v-1c0-1.3,2.7-2,4-2s4,0.7,4,2V18z"
             />
           </svg>
-          {{ book.author }}
-        </p>
-
-        <p title="Data em que o livro foi publicado">
+          {{ book.author }} &ensp;
           <svg
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +108,7 @@ export default {
 
 <style scoped>
 /* Container base */
-.container-base,
+.parent-container,
 .container-book-template .container-title-tag,
 .container-book-template .container-title-tag .container-tag {
   display: flex;
@@ -122,6 +119,7 @@ export default {
 /* Container do template de livros */
 .container-book-template {
   width: 100%;
+  cursor: pointer;
 }
 
 .container-book-template:hover {
