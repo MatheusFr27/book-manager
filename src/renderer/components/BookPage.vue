@@ -15,7 +15,6 @@
 
     <h1>Visualizar livros</h1>
 
-    <div class="container-view-and-detail">
       <section class="container-view">
         <div class="container-search-book">
           <!-- Seleciona o tipo de busca o usuário deseja ter -->
@@ -56,8 +55,8 @@
         <div v-show="viewBookDetail != 0">
         <h2><strong>Título:</strong> {{ viewBookDetail.title }}</h2>
 
-        <p v-show="viewBookDetail.genre || viewBookDetail.author"><strong>Gênero:</strong> {{ viewBookDetail.genre }} &ensp; <strong>Autor:</strong> {{ viewBookDetail.author }}</p>
-        <p v-show="viewBookDetail.launch"><strong>Lançado em:</strong> {{ viewBookDetail.launch }}</p>
+        <p class="no-point" v-show="viewBookDetail.genre || viewBookDetail.author"><strong>Gênero:</strong> {{ viewBookDetail.genre }} &ensp; <strong>Autor:</strong> {{ viewBookDetail.author }}</p>
+        <p class="no-point" v-show="viewBookDetail.launch"><strong>Lançado em:</strong> {{ viewBookDetail.launch }}</p>
 
         <!-- Tabela para mostrar exemplares, alugados e disponiveis -->
         <table>
@@ -76,13 +75,18 @@
         <!-- Aqui será mostrado as tags que foram postas sobre o elemento. -->
         <p v-show="viewBookDetail.observation" class="observation"><strong>Observações:</strong> {{ viewBookDetail.observation }}</p>
 
+        
         <p v-show="viewBookDetail.tags"><strong>Tags:</strong></p>
+        <div class="container-tags">
+          <div class="tag" v-for="(tag, i) in viewBookDetail.tags" :key="i" :style="{ backgroundColor: tag.color }">
+            <p>{{ tag.tagName }}</p>
+          </div>
+        </div>
         
         </div>
 
         <h3 v-show="viewBookDetail === 0">Nenhum livro foi selecionado ainda.</h3>
         </div>
-    </div>
   </section>
 </template>
 
@@ -134,6 +138,14 @@ export default {
           {
             tagName: 'Chega semana que vem.',
             color: '#a83832',
+          },
+          {
+            tagName: 'Capa Azul',
+            color: '#328ba8',
+          },
+          {
+            tagName: 'É pequeno.',
+            color: '#6d32a8'
           }
         ],
         observation: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos speriores sit culpa.'
@@ -170,6 +182,17 @@ export default {
         ],
         observation: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos speriores sit culpa.'
       },
+      {
+        id: 45997743,
+        title: "As minguas",
+        author: "Pingo Pinguço",
+        genre: "Drama",
+        launch: '19/09/1890',
+        numberOfBooks: 50,
+        retendBooks: 12,
+        tags: [],
+        observation: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos speriores sit culpa. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos speriores sit culpa.'
+      },
     ],
     viewBookDetail: 0,
   }),
@@ -185,15 +208,26 @@ export default {
 </script>
 
 <style scoped>
-.container-base,
-.container-base .container-view-and-detail {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.container-base {
+  display: grid;
+  grid-template-rows: 10% 20% 70%;
+  grid-auto-columns: 60% 40%;
+
+  height: 100%;
+  width: 100%;
+
+  box-sizing: content-box;
+}
+
+header {
+  grid-row: 1/2;
+  grid-column: 1/3;
 }
 
 h1 {
+  grid-row: 2/3;
+  grid-column: 1/3;
+
   color: rgb(68, 68, 68);
   font-size: 23pt;
   font-weight: 700;
@@ -202,27 +236,28 @@ h1 {
 }
 
 /* Estilo do container central onde divide a mostragem de livro dos detalhes de cada livro selecionado */
-.container-base .container-view-and-detail {
-  width: 100%;
+.container-view {
+  grid-row: 3/4;
+  grid-column: 1/2;
+  
+  margin: 0.5em;
+}
 
-  margin-bottom: 3em;
+.container-book-detail{
+  grid-row: 3/4;
+  grid-column: 2/3;
 
-  flex-direction: row;
-  justify-content: space-around;
+  margin: 0.5em;
+  margin-bottom: 4em;
 }
 /* / */
 
-/* Estilo da parte de mostragem de livros */
-.container-view-and-detail .container-view {
-  width: 60%;
-}
-
-.container-base .container-view-and-detail .container-view-books {
+.container-view .container-view-books {
   background-color: rgb(250, 250, 250);
   border-radius: 5px 5px;
 
   width: 100%;
-  height: 35em;
+  height: 38.5em;
 
   overflow-y: scroll;
 }
@@ -266,36 +301,57 @@ h1 {
 /* / */
 
 /* Estilo da visualização dos livros */
-.container-base .container-view-and-detail .container-book-detail {
+.container-book-detail {
   background-color: rgb(240, 240, 240);
   border-radius: 5px 5px;
 
-  width: 35%;
-  height: 30em;
+  height: 39em;
 
+  margin-top: 3em;
   padding: 0.5em 1em;
 
   overflow-y: auto;
 }
 
-.container-base .container-view-and-detail .container-book-detail table {
+.container-book-detail table {
   border: 1.5px solid rgb(19, 19, 19);
   background-color: rgb(230, 230, 230);
 
 }
 
-.container-base .container-view-and-detail .container-book-detail table thead {
+.container-book-detail table thead {
   background-color: rgb(202, 202, 202);
 
 }
 
-.container-base .container-view-and-detail .container-book-detail table tr td {
+.container-book-detail table tr td {
   text-align: center;
 }
 
-.container-base .container-view-and-detail .container-book-detail .observation {
+.container-book-detail .observation {
   text-align: justify;
   font-size: 12pt;
+}
+
+.container-book-detail .container-tags {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-shrink: 1;
+
+  overflow-y: auto;
+}
+
+.container-book-detail .container-tags .tag {
+  padding: 0.5em;
+  margin: 0.3em;
+  border-radius: 10px 10px;
+}
+
+.container-book-detail .container-tags .tag p {
+  padding: 0;
+  margin: 0;
 }
 /* / */
 </style>
