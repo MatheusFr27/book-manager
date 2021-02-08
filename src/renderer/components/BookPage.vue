@@ -53,10 +53,11 @@
 
       <!-- Mostra detalhes do elemento -->
       <div class="container-book-detail">
+        <div v-show="viewBookDetail != 0">
         <h2><strong>Título:</strong> {{ viewBookDetail.title }}</h2>
 
-        <p><strong>Gênero:</strong> {{ viewBookDetail.genre }} &ensp; <strong>Autor:</strong> {{ viewBookDetail.author }}</p>
-        <p><strong>Lançado em:</strong> {{ viewBookDetail.launch }}</p>
+        <p v-show="viewBookDetail.genre || viewBookDetail.author"><strong>Gênero:</strong> {{ viewBookDetail.genre }} &ensp; <strong>Autor:</strong> {{ viewBookDetail.author }}</p>
+        <p v-show="viewBookDetail.launch"><strong>Lançado em:</strong> {{ viewBookDetail.launch }}</p>
 
         <!-- Tabela para mostrar exemplares, alugados e disponiveis -->
         <table>
@@ -73,8 +74,14 @@
         </table>
 
         <!-- Aqui será mostrado as tags que foram postas sobre o elemento. -->
-        <p><strong>Observações:</strong></p>
-      </div>
+        <p v-show="viewBookDetail.observation" class="observation"><strong>Observações:</strong> {{ viewBookDetail.observation }}</p>
+
+        <p v-show="viewBookDetail.tags"><strong>Tags:</strong></p>
+        
+        </div>
+
+        <h3 v-show="viewBookDetail === 0">Nenhum livro foi selecionado ainda.</h3>
+        </div>
     </div>
   </section>
 </template>
@@ -101,14 +108,19 @@ export default {
         retendBooks: 3,
         tags: [
           {
-            tagName: 'Livro véio',
-            color: '#4287f5'
+            tagName: 'Um livro inventado por um louco.',
+            color: '#fad419'
           },
           {
-            tagName: 'Em algum lugar muito secreto tem ouro.',
+            tagName: 'Um livro inventado por um louco.',
+            color: '#fad419'
+          },
+          {
+            tagName: 'Um livro inventado por um louco.',
             color: '#fad419'
           }
-        ]
+        ],
+        observation: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos speriores sit culpa, illo voluptas rerum nesciunt vitae voluptatumesse. Perferendis itaque ex voluptate debitis. Consequuntur, alias placeat quaerat quam magnam tenetur iste. Perferendis exercitationem, tenetur labore eius reiciendis assumenda aperiam aliquid id soluta commodi. Eligendi sint sapiente saepe officia ipsam id aliquam? Nam odit quod praesentium iste ipsa animi exercitationem inventore. Veritatis quis distinctio illum doloremqu exercitationem aliquid, ipsa maiores totam sit soluta quam at iusto maxime mollitia nobis eius laudantium repellat quia, impedit a? Non exercitationem esse voluptatem eum, blanditiis voluptatum dolor beatae ex amet soluta consequatur dignissimos. Sint.",
       },
       {
         id: 6888654,
@@ -118,10 +130,48 @@ export default {
         launch: '19/03/1999',
         numberOfBooks: 10,
         retendBooks: 5,
-        tags: []
+        tags: [
+          {
+            tagName: 'Chega semana que vem.',
+            color: '#a83832',
+          }
+        ],
+        observation: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos speriores sit culpa.'
+      },
+      {
+        id: 984320,
+        title: "Uma noite sombria na casa de Jhone Mense",
+        author: "Vivi grilo",
+        genre: "Mistério",
+        launch: '13/04/2020',
+        numberOfBooks: 1,
+        retendBooks: 0,
+        tags: [
+          {
+            tagName: 'Quem lê fica louco!',
+            color: '#a81313',
+          }
+        ],
+        observation: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos speriores sit culpa.'
+      },
+      {
+        id: 10097622,
+        title: "As duas faces da lua",
+        author: "Thiane",
+        genre: "Sobrenatural",
+        launch: '23/05/2012',
+        numberOfBooks: 7,
+        retendBooks: 4,
+        tags: [
+          {
+            tagName: 'Quem lê fica louco!',
+            color: '#a81313',
+          }
+        ],
+        observation: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos speriores sit culpa.'
       },
     ],
-    viewBookDetail: [],
+    viewBookDetail: 0,
   }),
   methods: {},
   computed: {
@@ -129,7 +179,7 @@ export default {
       if(this.viewBookDetail.numberOfBooks && this.viewBookDetail.retendBooks) {
         return this.viewBookDetail.numberOfBooks - this.viewBookDetail.retendBooks
       }
-    }
+    },
   }
 };
 </script>
@@ -224,6 +274,8 @@ h1 {
   height: 30em;
 
   padding: 0.5em 1em;
+
+  overflow-y: auto;
 }
 
 .container-base .container-view-and-detail .container-book-detail table {
@@ -239,6 +291,11 @@ h1 {
 
 .container-base .container-view-and-detail .container-book-detail table tr td {
   text-align: center;
+}
+
+.container-base .container-view-and-detail .container-book-detail .observation {
+  text-align: justify;
+  font-size: 12pt;
 }
 /* / */
 </style>
