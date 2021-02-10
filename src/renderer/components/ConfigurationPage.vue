@@ -4,6 +4,7 @@
       <li>Aqui eu terei opção de Tema Padrão, branco ou escuro</li>
       <li>Aumentar ou diminuir letra</li>
       <li>Transforma toda font em arial</li>
+      <li>Tabela de atalhos da aplicação</li>
     </ul>
   </section>
 </template>
