@@ -1,17 +1,23 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <Header />
+
+    <section class="central-display-container">
+      <router-view></router-view>
+    </section>
 
     <Footer />
   </div>
 </template>
 
 <script>
+import Header from "../renderer/components/ComponentsFolder/Header";
 import Footer from "../renderer/components/ComponentsFolder/Footer";
 
 export default {
   name: "book-manager",
   components: {
+    Header,
     Footer,
   },
 };
@@ -19,6 +25,11 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
 
 html,
 body {
@@ -31,5 +42,22 @@ body {
 
   height: 100%;
   width: 100%;
+}
+
+body {
+  display: grid;
+  grid-template-rows: 3rem auto 3rem;
+}
+
+header {
+  grid-row: 1/2;
+}
+
+.central-display-container {
+  grid-row: 2/3;
+}
+
+footer {
+  grid-row: 3/4;
 }
 </style>

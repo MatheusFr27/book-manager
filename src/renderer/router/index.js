@@ -19,5 +19,15 @@ export default new Router({
       name: "InformationPage",
       component: require("@/components/InformationPage").default,
     },
+    {
+      path: "/book",
+      name: "BookPage",
+      component: require("@/components/BookPage").default,
+    },
+    {
+      path: "/configuration",
+      name: "ConfigurationPage",
+      component: require("@/components/ConfigurationPage").default,
+    },
   ],
 });
