@@ -11,7 +11,6 @@
 
 <template>
   <section class="container-base">
-    <Header />
 
     <h1>Visualizar livros</h1>
 

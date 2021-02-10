@@ -1,7 +1,5 @@
 <template>
   <section class="container-base">
-    <Header />
-
     <h1>Informações</h1>
     <section class="container-informations">
       <!-- Lado das informações -->
